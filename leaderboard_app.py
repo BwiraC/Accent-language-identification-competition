@@ -454,7 +454,7 @@ with tab_submit:
     with col1:
         team_name = st.text_input(
             "👤 Team / Participant name",
-            placeholder="e.g. Team Alpha",
+            placeholder="e.g. Team Me & You",
             help="Your name or team name as it will appear on the leaderboard"
         )
 
