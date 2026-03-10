@@ -56,7 +56,6 @@ The audio clips originate from [Mozilla Common Voice](https://commonvoice.mozill
 | Code | Language | Native Accents | Foreign Accents |
 |------|----------|----------------|-----------------|
 | `fr` | French | paris, lyon, marseille, québec | maghrebin, africain, anglophone |
-| `en` | English | american, british, australian, canadian | french, spanish, indian |
 | `sw` | Swahili | tanzanian, kenyan, ugandan | congolais, rwandais |
 | `ha` | Hausa | kano, sokoto, zaria | nigerien, camerounais |
 | `ar` | Arabic | egyptien, marocain, golfe, levantin | franco_arabe, anglophone |
