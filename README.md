@@ -2,6 +2,10 @@
 
 > **Classify spoken language and accent nativeness from 10-second audio clips.**  
 > Built on Mozilla Common Voice · 7 languages · 3 audio augmentation types
+>
+> [![Leaderboard](https://img.shields.io/badge/🏆_Leaderboard-Streamlit-red?style=for-the-badge)](https://accent-language-identification-competition-aims2026.streamlit.app/)
+
+> Submit your predictions and check your rank on the live leaderboard.
 
 ---
 
