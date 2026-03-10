@@ -35,9 +35,9 @@ except ImportError:
 #   CONFIGURATION — modifier selon votre setup
 # =============================================================================
 
-COMPETITION_TITLE   = "🌍 Language Identification Competition"
+COMPETITION_TITLE   = "🌍 Language Identification Challenge"
 COMPETITION_SUBTITLE = "Multilingual LibriSpeech · 7 Languages · Deep Learning"
-SECRET_LABELS_PATH  = "Accent & language identification competition/organizer/secret_test_labels.csv"   # chemin relatif
+SECRET_LABELS_PATH  = "organizer/secret_test_labels.csv"   # chemin local
 LEADERBOARD_FILE    = "leaderboard.json"                   # stockage persistant
 MAX_SUBMISSIONS_DAY = 3
 LANGUAGES           = ["fr", "de", "es", "it", "pt", "nl", "pl"]
@@ -50,11 +50,54 @@ LANG_NAMES = {
 
 
 # =============================================================================
+#   CHARGEMENT DES LABELS SECRETS
+#   Priorité : 1) fichier local  2) Streamlit Secrets (pour déploiement cloud)
+# =============================================================================
+
+def load_secret_labels() -> pd.DataFrame:
+    """
+    Priorité 1 : Streamlit Secrets (fonctionne en local ET sur cloud)
+    Priorité 2 : fichier local (fallback)
+    """
+    from io import StringIO
+
+    # Priorité 1 — Streamlit Secrets (cloud ET local via .streamlit/secrets.toml)
+    try:
+        secret_csv = st.secrets["secret_labels_csv"]
+        df = pd.read_csv(StringIO(secret_csv))
+        cols = [c for c in ["clip_id", "language", "is_native", "accent_region"] if c in df.columns]
+        if len(df) > 0:
+            return df[cols]
+    except Exception:
+        pass
+
+    # Priorité 2 — fichier local (fallback)
+    possible_paths = [
+        "organizer/secret_test_labels.csv",
+        "Accent & language identification competition/organizer/secret_test_labels.csv",
+        SECRET_LABELS_PATH,
+    ]
+    for path in possible_paths:
+        if os.path.exists(path):
+            df = pd.read_csv(path)
+            cols = [c for c in ["clip_id", "language", "is_native", "accent_region"] if c in df.columns]
+            return df[cols]
+
+    return None
+
+
+# =============================================================================
 #   SCORING
 # =============================================================================
 
 def compute_score(submission: pd.DataFrame, secret: pd.DataFrame) -> dict:
-    merged = submission.merge(secret, on="clip_id", suffixes=("_pred", "_true"))
+    # Colonnes scoring uniquement — ignorer checksum, confidences etc.
+    sub_cols    = ["clip_id", "language", "is_native"]
+    secret_cols = ["clip_id", "language", "is_native"]
+    sub    = submission[[c for c in sub_cols    if c in submission.columns]].copy()
+    sec    = secret[[c    for c in secret_cols  if c in secret.columns]].copy()
+
+    merged = sub.merge(sec, on="clip_id", suffixes=("_pred", "_true"))
 
     if len(merged) == 0:
         return {"error": "No matching clip_id found between submission and secret labels."}
@@ -390,17 +433,28 @@ with tab_submit:
         st.error("scikit-learn not installed. Run: `pip install scikit-learn`")
         st.stop()
 
-    if not os.path.exists(SECRET_LABELS_PATH):
-        st.error(f"Secret labels file not found: `{SECRET_LABELS_PATH}`")
-        st.info("Place `secret_test_labels.csv` in the `organizer/` folder next to this script.")
+    secret_df = load_secret_labels()
+    if secret_df is None:
+        st.error("❌ Secret labels not configured. Submissions cannot be scored.")
+        st.markdown("---")
+        col_a, col_b = st.columns(2)
+        with col_a:
+            st.markdown("#### 💻 En local")
+            st.markdown("Copiez le fichier généré par le builder dans le bon dossier :")
+            st.code("mkdir organizer\ncp accent_dataset_output/organizer/secret_test_labels.csv ./organizer/", language="bash")
+        with col_b:
+            st.markdown("#### ☁️ Sur Streamlit Cloud")
+            st.markdown("Dans **Settings → Secrets**, ajoutez le contenu du fichier :")
+            st.code('secret_labels_csv = """\nclip_id,language,is_native,accent_region\nfr_000001,fr,1,paris\nde_000001,de,0,turkish\n...\n"""', language="toml")
+            st.info("Copiez-collez TOUT le contenu de `secret_test_labels.csv` entre les guillemets.")
         st.stop()
 
     col1, col2 = st.columns([1, 1])
 
     with col1:
         team_name = st.text_input(
-            "👤 Team / Participant names",
-            placeholder="e.g. Team You_Name & His_Name",
+            "👤 Team / Participant name",
+            placeholder="e.g. Team Alpha",
             help="Your name or team name as it will appear on the leaderboard"
         )
 
@@ -430,8 +484,8 @@ with tab_submit:
             if st.button("🚀 Score My Submission"):
                 with st.spinner("Scoring your submission..."):
                     try:
-                        sub_df    = pd.read_csv(uploaded)
-                        secret_df = pd.read_csv(SECRET_LABELS_PATH)
+                        sub_df = pd.read_csv(uploaded)
+                        # secret_df already loaded above
 
                         # Validate
                         errors = validate_submission(sub_df)
