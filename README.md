@@ -1,7 +1,7 @@
 # 🎙️ Accent & Language Identification Challenge
 
 > **Classify spoken language and accent nativeness from 10-second audio clips.**  
-> Built on Mozilla Common Voice · 8 languages · 3 audio augmentation types
+> Built on Mozilla Common Voice · 7 languages · 3 audio augmentation types
 
 ---
 
@@ -101,16 +101,15 @@ Each row in the CSV files contains pre-extracted audio features so participants 
 ## Files
 
 ```
-accent_dataset_output/
+Accent & language identification competition/
 │
-├── 📄 full_dataset.csv          All clips with labels (train + test combined)
 ├── 📄 train_dataset.csv         Training set — 80% of data — WITH labels
 ├── 📄 test_dataset.csv          Test set — 20% of data — WITHOUT labels
 ├── 📄 submission_example.csv    Example submission file (random predictions)
-├── 🔒 secret_test_labels.csv    Ground truth labels for the test set [ORGANIZER ONLY]
 ├── 📄 dataset_info.json         Competition metadata and statistics
 ├── 📄 README.md                 This file
-└── 📄 requirements.txt          Python dependencies
+├── 📄 requirements              Python dependencies
+└── 📄 requirements_streamlit.txt          Streamlit dependencies
 ```
 
 ### File Details
@@ -149,11 +148,11 @@ Contains the true labels for the test set. This file is kept by the competition 
 
 ### Task 1 — Language Identification (Primary)
 
-Given the pre-extracted features of a 10-second audio clip, predict the spoken **language** (one of 8 ISO codes).
+Given the pre-extracted features of a 10-second audio clip, predict the spoken **language** (one of 7 ISO codes).
 
 ```
 Input:  feature vector (11 to 50+ columns depending on librosa availability)
-Output: language code string (fr, en, sw, ha, ar, wo, pt, de)
+Output: language code string (fr, sw, ha, ar, wo, pt, de)
 ```
 
 ### Task 2 — Native Speaker Detection (Secondary)
@@ -223,7 +222,7 @@ sw_000088_aug1,sw,1,tanzanian,0.7645,0.9012
 | Column | Required | Type | Values | Description |
 |--------|----------|------|--------|-------------|
 | `clip_id` | ✅ Yes | string | From `test_dataset.csv` | Must match test set IDs exactly |
-| `language` | ✅ Yes | string | `fr`, `en`, `sw`, `ha`, `ar`, `wo`, `pt`, `de` | Predicted language |
+| `language` | ✅ Yes | string | `fr`, `sw`, `ha`, `ar`, `wo`, `pt`, `de` | Predicted language |
 | `is_native` | ✅ Yes | int | `0` or `1` | Native speaker prediction |
 | `accent_region` | ✅ Yes | string | Any accent string | Predicted accent (use `unknown` if unsure) |
 | `confidence_language` | ✅ Yes | float | `[0.0, 1.0]` | Model confidence for language prediction |
@@ -246,7 +245,7 @@ import pandas as pd
 sub    = pd.read_csv("submission.csv")
 test   = pd.read_csv("test_dataset.csv")
 
-LANGS  = {'fr','en','sw','ha','ar','wo','pt','de'}
+LANGS  = {'fr','sw','ha','ar','wo','pt','de'}
 errors = []
 
 # Check all clip IDs present
