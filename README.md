@@ -576,9 +576,9 @@ A: Wolof is a major language of Senegal and The Gambia, spoken by ~10 million pe
 If you use this dataset or competition framework in academic work, please cite:
 
 ```bibtex
-@dataset{accent_lang_id_2025,
+@dataset{accent_lang_id_2026,
   title     = {Accent \& Language Identification Challenge Dataset},
-  year      = {2025},
+  year      = {2026},
   note      = {Built on Mozilla Common Voice v13, augmented with audiomentations},
   url       = {https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0}
 }
@@ -586,4 +586,4 @@ If you use this dataset or competition framework in academic work, please cite:
 
 ---
 
-*Competition framework built with `accent_dataset_builder_v2.py` · Mozilla Common Voice · HuggingFace Datasets*
+*Competition framework built with `accent_dataset_builder_v2.py` · Mozilla Common Voice · HuggingFace Datasets By Christian Munguaganze & Fatou Bintou*
