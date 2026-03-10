@@ -1,0 +1,82 @@
+# =============================================================================
+#  Accent & Language Identification Challenge — Requirements
+# =============================================================================
+#
+#  QUICK INSTALL (recommended — inside a virtual environment):
+#
+#    python -m venv env_accent
+#    source env_accent/bin/activate      # Mac / Linux
+#    env_accent\Scripts\activate         # Windows
+#
+#    pip install --upgrade pip
+#    pip install -r requirements.txt
+#
+# =============================================================================
+
+# ── Core scientific stack ─────────────────────────────────────────────────────
+numpy==1.26.4               # Array computing — pinned for librosa compatibility
+pandas>=2.0.0               # Data manipulation and CSV I/O
+scipy>=1.11.0               # Signal processing (butter filter, FFT)
+
+# ── Audio processing ──────────────────────────────────────────────────────────
+librosa>=0.10.1             # Audio feature extraction (MFCCs, chroma, F0, mel)
+soundfile>=0.12.1           # Read/write WAV files (libsndfile backend)
+audiomentations>=0.34.0     # Audio augmentation (noise, pitch shift, codec)
+
+# ── Machine learning ──────────────────────────────────────────────────────────
+scikit-learn>=1.3.0         # Classifiers, train/test split, metrics, cross-val
+xgboost>=2.0.0              # Gradient boosting (strong baseline)
+
+# ── Dataset download (HuggingFace) ───────────────────────────────────────────
+datasets>=2.14.0            # HuggingFace datasets library (streaming download)
+huggingface_hub>=0.19.0     # HuggingFace authentication and model hub access
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+tqdm>=4.66.0                # Progress bars
+joblib>=1.3.0               # Parallel processing and model serialization
+
+# =============================================================================
+#  OPTIONAL — for deep learning approaches
+# =============================================================================
+
+# Uncomment to install PyTorch (CPU version):
+# torch>=2.1.0
+# torchaudio>=2.1.0
+
+# Uncomment for GPU (CUDA 11.8):
+# torch>=2.1.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+# torchaudio>=2.1.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+
+# Uncomment for Transformers (wav2vec 2.0, Whisper):
+# transformers>=4.35.0
+# accelerate>=0.24.0
+
+# =============================================================================
+#  OPTIONAL — for visualization and notebooks
+# =============================================================================
+
+# matplotlib>=3.7.0          # Plots and confusion matrices
+# seaborn>=0.12.0            # Statistical visualization
+# jupyter>=1.0.0             # Jupyter notebooks
+# ipykernel>=6.25.0          # Jupyter kernel
+
+# =============================================================================
+#  NOTES
+# =============================================================================
+#
+#  numpy==1.26.4 is pinned intentionally.
+#  numpy 2.x breaks librosa and several other packages (gensim, contourpy).
+#  If you already have numpy 2.x installed globally, the virtual environment
+#  approach above will isolate this project with the correct version.
+#
+#  audiomentations requires ffmpeg for MP3 compression augmentation:
+#    Ubuntu/Debian : sudo apt install ffmpeg
+#    Mac (Homebrew): brew install ffmpeg
+#    Windows       : https://ffmpeg.org/download.html (add to PATH)
+#
+#  soundfile requires libsndfile:
+#    Ubuntu/Debian : sudo apt install libsndfile1
+#    Mac           : brew install libsndfile
+#    Windows       : installed automatically via pip wheel
+#
+# =============================================================================

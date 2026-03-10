@@ -1,0 +1,56 @@
+{
+  "competition": "Accent & Language Identification Challenge",
+  "version": "v2.0",
+  "generated_at": "2026-03-10 15:34:17",
+  "source": "facebook/multilingual_librispeech",
+  "dataset_stats": {
+    "total_clips": 4200,
+    "train_clips": 3360,
+    "test_clips": 840,
+    "languages": [
+      "de",
+      "es",
+      "fr",
+      "it",
+      "nl",
+      "pl",
+      "pt"
+    ],
+    "n_languages": 7,
+    "native_ratio": 0.751,
+    "sample_rate_hz": 16000,
+    "clip_duration_s": 10,
+    "features_count": 60
+  },
+  "augmentation_types": {
+    "original": "Unmodified audio clip",
+    "noise_ambient": "Gaussian noise + telephone bandpass filter",
+    "pitch_time_shift": "Pitch shift (±3 semitones) + time stretch (×0.85–1.15)",
+    "degraded_codec": "MP3 compression (16–64 kbps) + low-pass filter + clipping"
+  },
+  "submission_format": {
+    "filename": "submission.csv",
+    "required_columns": [
+      "clip_id",
+      "language",
+      "is_native",
+      "accent_region",
+      "confidence_language",
+      "confidence_native"
+    ],
+    "max_submissions_per_day": 3
+  },
+  "scoring": {
+    "primary": "weighted_f1_language",
+    "secondary": "accuracy_is_native",
+    "formula": "Final Score = 0.6 × F1_language + 0.4 × Accuracy_native"
+  },
+  "files": {
+    "train_dataset.csv": "Training set (80%) WITH labels — use to train your model",
+    "test_dataset.csv": "Test set (20%) WITHOUT labels — predict these",
+    "submission_example.csv": "Submission format example (random predictions)",
+    "dataset_info.json": "This file — competition metadata",
+    "README.md": "Full competition documentation",
+    "requirements.txt": "Python dependencies"
+  }
+}
