@@ -41,7 +41,7 @@ The dataset is derived from **Mozilla Common Voice** and has been augmented ×4 
 |---|---|
 | **Task type** | Multi-output classification |
 | **Input** | Audio features (pre-extracted) |
-| **Languages** | French, English, Swahili, Hausa, Arabic, Wolof, Portuguese, German |
+| **Languages** | French,Swahili, Hausa, Arabic, Wolof, Portuguese, German |
 | **Total clips** | Original × 4 after augmentation |
 | **Split** | 80% train / 20% test |
 | **Primary metric** | Weighted F1-score (language) |
