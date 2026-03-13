@@ -408,16 +408,30 @@ with tab_lb:
                                "acc_native", "coverage", "timestamp"]].copy()
         display_df.columns = ["Team", "Final Score", "F1 Language",
                                "Acc Native", "Coverage %", "Best Submission"]
-        display_df.index   = [f"{medals[i] if i < 3 else i+1}" for i in range(len(display_df))]
-
-        st.dataframe(
-            display_df.style
-                .background_gradient(subset=["Final Score"], cmap="Greens")
-                .format({"Final Score": "{:.4f}", "F1 Language": "{:.4f}",
-                         "Acc Native": "{:.4f}", "Coverage %": "{:.1f}%"}),
-            use_container_width=True,
-            height=400,
+        display_df.insert(
+            0, "Rank",
+            [medals[i] if i < 3 else f"#{i+1}" for i in range(len(display_df))]
         )
+        display_df = display_df.reset_index(drop=True)
+        
+        score_min = display_df["Final Score"].min()
+        score_max = display_df["Final Score"].max()
+        
+        if score_min == score_max:
+            styled = display_df.style.format(
+                {"Final Score": "{:.4f}", "F1 Language": "{:.4f}",
+                 "Acc Native": "{:.4f}", "Coverage %": "{:.1f}%"}
+            )
+        else:
+            styled = (
+                display_df.style
+                .background_gradient(
+                    subset=["Final Score"], cmap="Greens",
+                    vmin=score_min, vmax=score_max
+                )
+                .format({"Final Score": "{:.4f}", "F1 Language": "{:.4f}",
+                         "Acc Native": "{:.4f}", "Coverage %": "{:.1f}%"})
+            )
 
         # Refresh button
         if st.button("🔄 Refresh Leaderboard"):
