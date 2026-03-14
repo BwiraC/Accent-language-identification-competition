@@ -32,11 +32,12 @@ except ImportError:
     SKLEARN_OK = False
 
 # =============================================================================
-#   CONFIGURATION — modifier selon votre setup
+#   CONFIGURATION — 
 # =============================================================================
 
 COMPETITION_TITLE   = "🌍 Language Identification Compétition"
-COMPETITION_SUBTITLE = "Multilingual LibriSpeech · 7 Languages · Deep Learning"
+#COMPETITION_SUBTITLE = "Multilingual LibriSpeech · 7 Languages · Deep Learning"
+COMPETITION_SUBTITLE = "Team : Christian Munguagnaze Bwirachiza & Fatou Bintou Mbaye· Deep Learning Course @AIMS-Senegal 2026 "
 SECRET_LABELS_PATH  = "organizer/secret_test_labels.csv"   # chemin local
 LEADERBOARD_FILE    = "leaderboard.json"                   # stockage persistant
 MAX_SUBMISSIONS_DAY = 3
