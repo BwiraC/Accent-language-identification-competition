@@ -35,7 +35,7 @@ except ImportError:
 #   CONFIGURATION — modifier selon votre setup
 # =============================================================================
 
-COMPETITION_TITLE   = "🌍 Language Identification Challenge"
+COMPETITION_TITLE   = "🌍 Language Identification Compétition"
 COMPETITION_SUBTITLE = "Multilingual LibriSpeech · 7 Languages · Deep Learning"
 SECRET_LABELS_PATH  = "organizer/secret_test_labels.csv"   # chemin local
 LEADERBOARD_FILE    = "leaderboard.json"                   # stockage persistant
