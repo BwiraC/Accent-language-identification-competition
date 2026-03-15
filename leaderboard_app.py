@@ -339,7 +339,7 @@ h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
     padding: 1.2rem 1.5rem; margin: 0.5rem 0;
 }
 .big-score {
-    font-family: 'Space Mono', monospace; font-size: 3rem;
+    font-family: 'Space Mono', monospace; font-size: 2rem;
     font-weight: 700; color: #48bb78; line-height: 1;
 }
 .score-label {
