@@ -131,6 +131,10 @@ def load_leaderboard() -> list:
             r["acc_native"]    = round(float(r.get("acc_native",    0)), 4)
             r["coverage"]      = float(r.get("coverage",      0))
             r["n_predictions"] = int(r.get("n_predictions",   0))
+
+            for key in ["final_score", "f1_language", "acc_native"]:
+              if r[key] > 1:
+                r[key] = round(r[key] / 10000, 4)
         return records
     except Exception as e:
         st.error(f"Error loading leaderboard: {e}")
