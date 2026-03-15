@@ -421,10 +421,10 @@ with tab_lb:
                 <div class="score-card {'top-team' if i == 0 else ''}">
                     <div class="score-label">{medals[i]} Rank {i+1}</div>
                     <div style="font-size:1.1rem;font-weight:600;color:#e2e8f0;margin-bottom:.5rem">{row['team']}</div>
-                    <div class="big-score">{row['final_score']:.4f}</div>
+                    <div class="big-score">{row['final_score']:.2%}</div>
                     <div style="margin-top:.8rem;font-size:.85rem;color:#718096">
-                        F1 Lang: <b style="color:#90cdf4">{row['f1_language']:.4f}</b> &nbsp;|&nbsp;
-                        Acc Native: <b style="color:#90cdf4">{row['acc_native']:.4f}</b>
+                        F1 Lang: <b style="color:#90cdf4">{row['f1_language']:.2%}</b> &nbsp;|&nbsp;
+                        Acc Native: <b style="color:#90cdf4">{row['acc_native']:.2%}</b>
                     </div>
                     <div style="font-size:.75rem;color:#4a5568;margin-top:.4rem">{row['timestamp']}</div>
                 </div>""", unsafe_allow_html=True)
