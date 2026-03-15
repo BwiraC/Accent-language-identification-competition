@@ -125,9 +125,10 @@ def load_leaderboard() -> list:
                     r["per_language_f1"] = json.loads(r["per_language_f1"])
                 except Exception:
                     r["per_language_f1"] = {}
-            r["final_score"]   = float(r.get("final_score",   0))
-            r["f1_language"]   = float(r.get("f1_language",   0))
-            r["acc_native"]    = float(r.get("acc_native",    0))
+
+            r["final_score"]   = round(float(r.get("final_score",   0)), 4)
+            r["f1_language"]   = round(float(r.get("f1_language",   0)), 4)
+            r["acc_native"]    = round(float(r.get("acc_native",    0)), 4)
             r["coverage"]      = float(r.get("coverage",      0))
             r["n_predictions"] = int(r.get("n_predictions",   0))
         return records
