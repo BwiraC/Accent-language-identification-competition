@@ -154,7 +154,8 @@ def append_leaderboard_entry(entry: dict):
             json.dumps(entry.get("per_language_f1", {})),
             entry["filename"],
         ]
-        ws.append_row(row, value_input_option="USER_ENTERED")
+        #ws.append_row(row, value_input_option="USER_ENTERED")
+        ws.append_row(row, value_input_option="RAW")
     except Exception as e:
         st.error(f"Error saving entry: {e}")
 
