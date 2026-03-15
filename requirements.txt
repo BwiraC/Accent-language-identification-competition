@@ -12,7 +12,8 @@
 #    pip install -r requirements.txt
 #
 # =============================================================================
-
+gspread
+google-auth
 # ── Core scientific stack ─────────────────────────────────────────────────────
 numpy==1.26.4               # Array computing — pinned for librosa compatibility
 pandas>=2.0.0               # Data manipulation and CSV I/O
