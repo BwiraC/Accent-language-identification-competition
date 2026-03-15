@@ -438,8 +438,12 @@ with tab_lb:
             [medals[i] if i < 3 else f"#{i+1}" for i in range(len(display_df))])
         display_df = display_df.reset_index(drop=True)
 
-        fmt = {"Final Score": "{:.4f}", "F1 Language": "{:.4f}",
-               "Acc Native": "{:.4f}", "Coverage %": "{:.1f}%"}
+        # fmt = {"Final Score": "{:.4f}", "F1 Language": "{:.4f}",
+        #       "Acc Native": "{:.4f}", "Coverage %": "{:.1f}%"}
+      
+        fmt = {"Final Score": "{:.2%}", "F1 Language": "{:.2%}",
+               "Acc Native": "{:.2%}", "Coverage %": "{:.1f}%"}
+      
         score_min = display_df["Final Score"].min()
         score_max = display_df["Final Score"].max()
         if score_min == score_max:
