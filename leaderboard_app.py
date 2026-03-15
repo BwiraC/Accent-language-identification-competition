@@ -44,7 +44,7 @@ except ImportError:
 # =============================================================================
 
 COMPETITION_TITLE    = "🌍 Language Identification Compétition"
-COMPETITION_SUBTITLE = "Team : Christian Munguagnaze Bwirachiza & Fatou Bintou Mbaye · Deep Learning Course @AIMS-Senegal 2026"
+COMPETITION_SUBTITLE = "Team : Christian Munguaganze Bwirachiza & Fatou Bintou Mbaye · Deep Learning Course @AIMS-Senegal 2026"
 MAX_SUBMISSIONS_DAY  = 3
 LANGUAGES            = ["fr", "de", "es", "it", "pt", "nl", "pl"]
 
@@ -340,7 +340,7 @@ h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
 }
 .big-score {
     font-family: 'Space Mono', monospace; font-size: 2rem;
-    font-weight: 700; color: #48bb78; line-height: 1;
+    font-weight: 600; color: #48bb78; line-height: 1;
 }
 .score-label {
     font-size: 0.8rem; color: #718096;
